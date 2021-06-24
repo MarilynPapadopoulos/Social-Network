@@ -11,7 +11,7 @@ const {
 
 //router.get('/', UserController.getAllUsers);
 
-// api/user
+// api/users
 router
     .route('/')
     .get(getAllUsers)

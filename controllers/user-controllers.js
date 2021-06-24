@@ -21,6 +21,17 @@ const UserController = {
                 path: 'thoughts',
                 select: '__v'
             })
+            .then(dbUserData => {
+                if (!dbUserData) {
+                    res.status(404).json({ message: 'No user found with this Id' })
+                    return;
+                }
+                res.jsona(dbUserData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(400).json(err);
+              });
     },
     createUser(req, res) {
         User.create(req.body)
