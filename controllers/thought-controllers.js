@@ -1,4 +1,5 @@
-const { Thoughts, Thought} = require('../models');
+const { Thoughts, Thought, User } = require('../models');
+
 // api/thought
 const ThoughtController = {
     getAllThoughts(req, res) {
@@ -19,10 +20,11 @@ const ThoughtController = {
     },
     createThought(req, res) {
         Thought.create(req.body) 
+        
         // push the created thought's _id to the associated user's thoughts array field
         .then(({ _id })=> {
             return User.findOneAndUpdate(
-                { __id: req.params.id },
+                { _id: req.body.userId },
                 { $push: { thoughts: _id }},
                 { new: true}
             );
@@ -32,9 +34,13 @@ const ThoughtController = {
                 res.status(400).json({ message: 'No user with this id' })
                 return;
         }
-            res.json(dbThoghtData);
+            res.json(dbThoughtData);
         })
-            .catch(err => res.json(err));  
+            .catch(err => {
+                console.log(err);
+                res.json(err); 
+            })
+                 
     },
     updateThought( req, res) {
         Thought.findOneAndUpdate({ _id: req.params.id}, req.body, { new: true, runValidators: true})
@@ -58,10 +64,13 @@ const ThoughtController = {
             })
             .catch(err => res.status(400).json(err));
     },
+
+    // /api/thoughts/:thoughtId/reactions
     createReaction(req, res) {
+        console.log("line 70", req.body);
         Thought.findOneAndUpdate(
-            { __id:req.params.id},
-            { $push: { reactions: body }},
+            { _id: req.params.id },
+            { $push: { reactions: req.body.reactionBody }},
             { new: true, runValidators: true } 
             )
        
@@ -71,10 +80,10 @@ const ThoughtController = {
             res.status(400).json(err);
         });
     },
-    deletReaction(req, res) {
+    deleteReaction(req, res) {
         Thought.findOneAndUpdate(
-            { __id: req.params.id },
-            { pull: { reactions: body }},
+            { _id: req.params.id },
+            { $pull: { reactions: req.body.reactionBody }},
             { new: true }
         )
         .then(dbThoughtData => res.json(dbThoughtData))
