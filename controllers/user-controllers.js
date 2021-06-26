@@ -26,7 +26,7 @@ const UserController = {
                     res.status(404).json({ message: 'No user found with this Id' })
                     return;
                 }
-                res.jsona(dbUserData);
+                res.json(dbUserData);
             })
             .catch(err => {
                 console.log(err);
@@ -38,6 +38,7 @@ const UserController = {
             .then(dbUserData => res.json(dbUserData))
             .catch(err => res.status(400).json(err));
     },
+    // api/users/id
     updateUser( req, res) {
         User.findOneAndUpdate({ _id: req.params.id}, req.body, { new: true, runValidators: true})
         .then(dbUserData => {
@@ -60,6 +61,7 @@ const UserController = {
             })
             .catch(err => res.status(400).json(err));
     },
+    // api/users/:id/friends
     addFriend(req, res) {
         User.findOneAndUpdate({ _id: req.params.id}, { friends: req.body }, { new: true }) 
         .then(dbUserData => {
