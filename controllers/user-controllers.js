@@ -34,7 +34,7 @@ const UserController = {
               });
     },
     createUser(req, res) {
-        User.create(req.body)
+        User.create(req.body, { runValidators: true })
             .then(dbUserData => res.json(dbUserData))
             .catch(err => res.status(400).json(err));
     },
