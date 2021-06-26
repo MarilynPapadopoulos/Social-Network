@@ -15,11 +15,14 @@ To start this app enter npm start from the command line to connect to the server
 ## Usage 
 
 [GET user and thought ](https://drive.google.com/file/d/1Zjd8-QRNPVfkmTx8SWAPpKNwKUWUNI8V/view)
+
 [GET user and thought by ID](https://drive.google.com/file/d/1TTHKWPhZmFKGzfypkr9uta1-JkpvGgi4/view)
 
 [POST, PUT, DELETE users](https://drive.google.com/file/d/1YghVQPY4xqheo2doFSQAZ3bz8uhhgbk_/view)
+
 [POST, PUT, DELETE thoughts](https://drive.google.com/file/d/1K4rz1ouio66UIp0MGmNAqRccT6VH_buO/view)
 
 [POST and DELETE friends](https://drive.google.com/file/d/1dA9oLTfa1bmaPph4FnRvfS3mIaClMzzd/view)
+
 [POST and DELETE reactions](https://drive.google.com/file/d/1PsKaiYAG57c63uQ-e39lTPGvCjv7khW2/view)
 
